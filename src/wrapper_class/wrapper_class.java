@@ -41,5 +41,6 @@ public class wrapper_class {
         System.out.println(number_string1);//2
         System.out.println(number_string2);//123456789
         System.out.println("---------------------------");
+        System.out.println("git测试！");
     }
 }
