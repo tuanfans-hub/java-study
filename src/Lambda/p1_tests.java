@@ -6,7 +6,7 @@ public class p1_tests {
         p1_girlfriend[] girlfriends = new p1_girlfriend[]{
             new p1_girlfriend("Alice", 25, 165),
             new p1_girlfriend("Bob", 22, 170),
-            new p1_girlfriend("Charlie", 25, 160),
+            new p1_girlfriend("Tom", 25, 160),
             new p1_girlfriend("Diana", 22, 155),
             new p1_girlfriend("Eve", 25, 165)
         };
