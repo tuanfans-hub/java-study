@@ -16,7 +16,7 @@ import java.util.function.Consumer;
  * */
 public class generic {
     public static void main(String[] args){
-        generic_class<String> gc = new generic_class<>();
+        AL_addAndRemove<String> gc = new AL_addAndRemove<>();
         Scanner sc = new Scanner(System.in);
 
         System.out.println("-----------------泛型类测试-------------------");
@@ -102,7 +102,7 @@ public class generic {
             }
 
             @Override
-            public <E> void addElement(generic_class<E> g, E... es) {
+            public <E> void addElement(AL_addAndRemove<E> g, E... es) {
                 for(E e:es){
                     g.add(e);
                 }
@@ -151,7 +151,7 @@ public class generic {
 
     }
 
-    private static void getInfo(generic_class<String> gc) {
+    private static void getInfo(AL_addAndRemove<String> gc) {
         System.out.println("集合元素个数："+ gc.size());
         System.out.println("集合容量："+ gc.getCapacity());
         System.out.println(gc); //默认调用toString()方法

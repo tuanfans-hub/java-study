@@ -19,5 +19,5 @@ public abstract class generic_function {
     public abstract <E,T> void printGf(E e, T t);
 
     //向指定集合添加多个元素
-    public abstract <E> void addElement(generic_class<E> g, E... es);
+    public abstract <E> void addElement(AL_addAndRemove<E> g, E... es);
 }

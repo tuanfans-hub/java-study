@@ -18,7 +18,7 @@ import java.util.Iterator;
  * }
  * 此处E可以理解为变量，但是不是用来记录数据的，而是记录数据的类型，可以写成：T、E、K、V等
  * */
-public class generic_class<E> implements Iterable<E>,generic_interface<E> {
+public class AL_addAndRemove<E> implements Iterable<E>,generic_interface<E> {
     private int size = 0;
     private int capacity =0;
     private Object[] obj = new Object[capacity];
@@ -42,7 +42,7 @@ public class generic_class<E> implements Iterable<E>,generic_interface<E> {
             }
 
             @Override
-            public <E> void addElement(generic_class<E> g, E... es) {
+            public <E> void addElement(AL_addAndRemove<E> g, E... es) {
                 for(E e : es){
                     g.add(e);
                 }
@@ -232,7 +232,7 @@ public class generic_class<E> implements Iterable<E>,generic_interface<E> {
     }
 
     @Override
-    public <T> E[] removeAll(generic_class<T> g, int... indexs) {
+    public <T> E[] removeAll(AL_addAndRemove<T> g, int... indexs) {
         Object[] reObj = new Object[indexs.length];
         int count = 0;
         for(int i = 0; i<indexs.length; i++){
