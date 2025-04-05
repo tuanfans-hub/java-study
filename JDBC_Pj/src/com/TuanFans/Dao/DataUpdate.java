@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
  * &#064;date 2025/4/5
  * &#064description 数据更新：删除、添加、更新数据通用
  */
-public class DataUpdate {
+public abstract class DataUpdate {
     public int dataUpdate(String sql, Object... values) {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
