@@ -1,5 +1,6 @@
 package com.TuanFans.Dao.Impl;
 
+import com.TuanFans.Dao.DataUpdate;
 import com.TuanFans.Dao.EmpDao;
 import com.TuanFans.pojo.Emp;
 import com.TuanFans.MySQL_File;
@@ -14,7 +15,7 @@ import java.util.List;
  * &#064;date 2025/4/5
  * &#064description DeptDao接口的实现类
  */
-public class EmpDaoImpl implements EmpDao {
+public class EmpDaoImpl extends DataUpdate implements EmpDao {
 
     @Override
     public int insertEmp(Emp emp) {
@@ -45,8 +46,6 @@ public class EmpDaoImpl implements EmpDao {
         String sql = "insert into mytest.emp values(?,?,?,?,?,?,?,?)";
         return dataUpdate(sql,emp.getEmpno(),emp.getEname(),emp.getJob(),emp.getMgr(),Date.valueOf(emp.getHiredate()),emp.getSal(),emp.getComm(),emp.getDeptno());
     }
-
-
 
     @Override
     public int deleteEmp(int empno) {
@@ -179,26 +178,5 @@ public class EmpDaoImpl implements EmpDao {
         }
         return emps;
     }
-
-    @Override
-    public int dataUpdate(String sql, Object... values) {
-        Connection conn = null;
-        PreparedStatement preparedStatement = null;
-        int rows = 0;
-        try{
-            conn = DriverManager.getConnection(MySQL_File.getUrl(), MySQL_File.getUsername(), MySQL_File.getPassword());
-            preparedStatement = conn.prepareStatement(sql);
-            for(int i = 0; i < values.length; i++){
-                preparedStatement.setObject(i+1,values[i]);
-            }
-            rows = preparedStatement.executeUpdate();
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally{
-            MySQL_File.close(conn,preparedStatement);
-        }
-        return rows;
-    }
-
 
 }
