@@ -18,56 +18,89 @@ public class EmpDaoImpl implements EmpDao {
 
     @Override
     public int insertEmp(Emp emp) {
-        Connection conn = null;
-        PreparedStatement preparedStatement = null;
-        int rows = 0;
-        try{
-            Class.forName(MySQL_File.getDriver());
-            conn = DriverManager.getConnection(MySQL_File.getUrl(), MySQL_File.getUsername(), MySQL_File.getPassword());
-            String SQL = "insert into mytest.emp values(?,?,?,?,?,?,?,?)";
-            preparedStatement = conn.prepareStatement(SQL);
-            preparedStatement.setInt(1,emp.getEmpno());
-            preparedStatement.setString(2,emp.getEname());
-            preparedStatement.setString(3,emp.getJob());
-            preparedStatement.setInt(4,emp.getMgr());
-            preparedStatement.setDate(5, Date.valueOf(emp.getHiredate()));
-            preparedStatement.setDouble(6,emp.getSal());
-            // comm字段为null时，使用setObject()方法
-            preparedStatement.setObject(7,emp.getComm());
-            preparedStatement.setInt(8,emp.getDeptno());
-            rows = preparedStatement.executeUpdate();
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally{
-            MySQL_File.close(conn,preparedStatement);
-        }
-        return rows;
+//        Connection conn = null;
+//        PreparedStatement preparedStatement = null;
+//        int rows = 0;
+//        try{
+//            Class.forName(MySQL_File.getDriver());
+//            conn = DriverManager.getConnection(MySQL_File.getUrl(), MySQL_File.getUsername(), MySQL_File.getPassword());
+//            String SQL = "insert into mytest.emp values(?,?,?,?,?,?,?,?)";
+//            preparedStatement = conn.prepareStatement(SQL);
+//            preparedStatement.setInt(1,emp.getEmpno());
+//            preparedStatement.setString(2,emp.getEname());
+//            preparedStatement.setString(3,emp.getJob());
+//            preparedStatement.setInt(4,emp.getMgr());
+//            preparedStatement.setDate(5, Date.valueOf(emp.getHiredate()));
+//            preparedStatement.setDouble(6,emp.getSal());
+//            // comm字段为null时，使用setObject()方法
+//            preparedStatement.setObject(7,emp.getComm());
+//            preparedStatement.setInt(8,emp.getDeptno());
+//            rows = preparedStatement.executeUpdate();
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }finally{
+//            MySQL_File.close(conn,preparedStatement);
+//        }
+//        return rows;
+        String sql = "insert into mytest.emp values(?,?,?,?,?,?,?,?)";
+        return dataUpdate(sql,emp.getEmpno(),emp.getEname(),emp.getJob(),emp.getMgr(),Date.valueOf(emp.getHiredate()),emp.getSal(),emp.getComm(),emp.getDeptno());
     }
+
+
 
     @Override
     public int deleteEmp(int empno) {
-        Connection conn = null;
-        PreparedStatement preparedStatement = null;
-        int rows = 0;
-        try{
-            Class.forName(MySQL_File.getDriver());
-            conn = DriverManager.getConnection(MySQL_File.getUrl(), MySQL_File.getUsername(), MySQL_File.getPassword());
-            String SQL = "delete from mytest.emp where empno = ?";
-            preparedStatement = conn.prepareStatement(SQL);
-            preparedStatement.setInt(1,empno);
-            rows = preparedStatement.executeUpdate();
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally{
-            MySQL_File.close(conn,preparedStatement);
-        }
-        return rows;
+//        Connection conn = null;
+//        PreparedStatement preparedStatement = null;
+//        int rows = 0;
+//        try{
+//            Class.forName(MySQL_File.getDriver());
+//            conn = DriverManager.getConnection(MySQL_File.getUrl(), MySQL_File.getUsername(), MySQL_File.getPassword());
+//            String SQL = "delete from mytest.emp where empno = ?";
+//            preparedStatement = conn.prepareStatement(SQL);
+//            preparedStatement.setInt(1,empno);
+//            rows = preparedStatement.executeUpdate();
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }finally{
+//            MySQL_File.close(conn,preparedStatement);
+//        }
+//        return rows;
+        String sql = "delete from mytest.emp where empno = ?";
+        return dataUpdate(sql,empno);
     }
 
     @Override
     public int updateEmp(int empno,String keyName,Object value) {
-        Connection conn = null;
-        PreparedStatement preparedStatement = null;
+//        Connection conn = null;
+//        PreparedStatement preparedStatement = null;
+//        // 对待更新字段名做安全检测
+//        String[] keyNames = {"ename","job","mgr","hiredate","sal","comm","deptno"};
+//        boolean flag = false;
+//        for(String name : keyNames){
+//            if(name.equals(keyName)){
+//                flag = true;
+//                break;
+//            }
+//        }
+//        if(!flag){
+//            throw new RuntimeException("没有"+keyName+"字段");
+//        }
+//        int rows = 0;
+//        try{
+//            Class.forName(MySQL_File.getDriver());
+//            conn = DriverManager.getConnection(MySQL_File.getUrl(), MySQL_File.getUsername(), MySQL_File.getPassword());
+//            String SQL = "update mytest.emp set "+keyName +" = ? where empno = ?";
+//            preparedStatement = conn.prepareStatement(SQL);
+//            preparedStatement.setObject(1,value);
+//            preparedStatement.setInt(2,empno);
+//            rows = preparedStatement.executeUpdate();
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }finally{
+//            MySQL_File.close(conn,preparedStatement);
+//        }
+//        return rows;
         // 对待更新字段名做安全检测
         String[] keyNames = {"ename","job","mgr","hiredate","sal","comm","deptno"};
         boolean flag = false;
@@ -80,21 +113,8 @@ public class EmpDaoImpl implements EmpDao {
         if(!flag){
             throw new RuntimeException("没有"+keyName+"字段");
         }
-        int rows = 0;
-        try{
-            Class.forName(MySQL_File.getDriver());
-            conn = DriverManager.getConnection(MySQL_File.getUrl(), MySQL_File.getUsername(), MySQL_File.getPassword());
-            String SQL = "update mytest.emp set "+keyName +" = ? where empno = ?";
-            preparedStatement = conn.prepareStatement(SQL);
-            preparedStatement.setObject(1,value);
-            preparedStatement.setInt(2,empno);
-            rows = preparedStatement.executeUpdate();
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally{
-            MySQL_File.close(conn,preparedStatement);
-        }
-        return rows;
+        String sql = "update mytest.emp set "+keyName +" = ? where empno = ?";
+        return dataUpdate(sql,value,empno);
     }
 
     @Override
@@ -159,4 +179,26 @@ public class EmpDaoImpl implements EmpDao {
         }
         return emps;
     }
+
+    @Override
+    public int dataUpdate(String sql, Object... values) {
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        int rows = 0;
+        try{
+            conn = DriverManager.getConnection(MySQL_File.getUrl(), MySQL_File.getUsername(), MySQL_File.getPassword());
+            preparedStatement = conn.prepareStatement(sql);
+            for(int i = 0; i < values.length; i++){
+                preparedStatement.setObject(i+1,values[i]);
+            }
+            rows = preparedStatement.executeUpdate();
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            MySQL_File.close(conn,preparedStatement);
+        }
+        return rows;
+    }
+
+
 }

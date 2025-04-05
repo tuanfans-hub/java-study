@@ -45,4 +45,12 @@ public interface EmpDao {
      * @return Emp类型的集合
      */
     List<Emp> findAll();
+
+    /**
+     * 删除、修改、更新数据库数据通用
+     * @param sql SQL语句
+     * @param values 参数数组
+     * @return int 影响行数（生效行数）
+     */
+    int dataUpdate(String sql,Object...values);
 }
