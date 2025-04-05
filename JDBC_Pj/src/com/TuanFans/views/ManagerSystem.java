@@ -21,6 +21,8 @@ public class ManagerSystem {
     private static final Scanner sc = new Scanner(System.in);
     private static final DeptDao deptDao = new DeptDaoImpl();
     private static final EmpDao empDao = new EmpDaoImpl();
+    // 设置日期格式
+    private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     public static void main(String[] args) {
         while(true){
             showMenu();
@@ -85,13 +87,11 @@ public class ManagerSystem {
         System.out.print("请输入上级工号：");
         int mgr = sc.nextInt();
         System.out.print("请输入入职日期：");
-        // 设置日期格式
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate hiredate = LocalDate.parse(sc.next(),dtf);
         System.out.print("请输入工资：");
-        double sal = sc.nextDouble();
+        Double sal = sc.nextDouble();
         System.out.print("请输入奖金：");
-        double comm = sc.nextDouble();
+        Double comm = sc.nextDouble();
         System.out.print("请输入部门编号：");
         int deptno = sc.nextInt();
         Emp emp2 = new Emp(empno,ename,job,mgr,hiredate,sal,comm,deptno);
