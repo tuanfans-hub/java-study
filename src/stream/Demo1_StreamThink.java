@@ -35,7 +35,7 @@ public class Demo1_StreamThink {
         map.put("长春","辽宁");
         map.put("厦门","福建");
         map.put("珠海","广东");
-//        Set<Map .Entry<String,String>> es = map.entrySet();
+//        Set<Map.Entry<String,String>> es = map.entrySet();
 //        es.stream().forEach(e -> System.out.println(e));
         //第一种：获取key的单列集合
         map.keySet().stream().forEach(key -> System.out.println(key+"="+map.get(key)));
@@ -52,9 +52,8 @@ public class Demo1_StreamThink {
         //Stream接口中静态方法of的细节
         //方法的形参是一个可变参数，可以传递一堆零散的数据，也可以传递数组
         //但是数组必须是引用数据类型的，如果传递基本数据类型数组，会把整个数组当做一个元素，放到stream当中。
-        Stream.of("甲","乙","丙","丁","戊","己","庚","辛","壬","癸").forEach(s -> System.out.print(s+" "));
+        Stream.of("甲","乙","丙","丁","戊","己","庚","辛","壬","癸").forEach(
+                s -> System.out.print(s+" "));
         System.out.println();
-
-
     }
 }

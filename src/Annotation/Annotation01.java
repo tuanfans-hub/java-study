@@ -2,7 +2,7 @@ package Annotation;
 
 /**
  * @author TuanFans
- * &#064;date 2025/3/8
+ * @date 2025/3/8
  */
 
 //1）注解（Annotation）也被称为元数据（Metadata），用于修饰解释包、类、方法、属性、构造器、局部变量等数据信息。

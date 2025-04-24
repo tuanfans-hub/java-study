@@ -1,6 +1,6 @@
-package abnormal;
+package myException;
 
-public class abnormal {
+public class Student {
     private String name;
     private int age;
 
@@ -23,9 +23,9 @@ public class abnormal {
     public void setName(String name){
         this.name=name;
     }
-    public void setAge(int age) throws AbnormalClass{
+    public void setAge(int age) throws MyException {
         if(age<0){
-            throw new AbnormalClass("年龄信息错误：age<0");
+            throw new MyException("年龄信息错误：age<0");
         }else {
             this.age = age;
         }

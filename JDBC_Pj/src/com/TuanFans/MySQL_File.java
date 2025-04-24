@@ -10,9 +10,10 @@ import java.util.List;
  * &#064;date 2025/4/4
  * &#064description 封装MySQL数据库连接信息
  */
+// allowPublicKeyRetrieval=true 允许通过公钥检索服务器的密钥
 public class MySQL_File {
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/mytest?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useServerPrepStmts=true&cachePrepStmts=true&rewriteBatchedStatements=true";
+    private static final String URL = "jdbc:mysql://localhost:3306/mytest?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useServerPrepStmts=true&cachePrepStmts=true&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true";
     private static final String USERNAME = "TuanFans";
     private static final String PASSWORD = "217134";
 
@@ -92,6 +93,28 @@ public class MySQL_File {
             }
         }
 
+    }
+
+    // 关闭Connection连接
+    public static void close(Connection conn){
+        if(conn!=null){
+            try{
+                conn.close();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    // 关闭PreparedStatement
+    public static void close(PreparedStatement preparedStatement){
+        if(preparedStatement!=null){
+            try{
+                preparedStatement.close();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 }
 

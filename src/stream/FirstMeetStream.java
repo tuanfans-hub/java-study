@@ -31,9 +31,8 @@ public class FirstMeetStream {
         noStreamToList(list, z_list1, z_list2);
 
         System.out.println("-----------使用Stream流---------------");
-        list.stream().filter(s -> s.startsWith("张")).filter(s -> s.length()==3).forEach(s -> System.out.println(s));
-
-
+        list.stream().filter(s -> s.startsWith("张")).filter(
+                s -> s.length()==3).forEach(s -> System.out.println(s));
     }
 
     //没使用Stream流实现

@@ -2,6 +2,7 @@ package com.TuanFans.Dao.Impl;
 
 import com.TuanFans.Dao.DataUpdate;
 import com.TuanFans.Dao.EmpDao;
+import com.TuanFans.Dao.MyConnectionPool;
 import com.TuanFans.pojo.Emp;
 import com.TuanFans.MySQL_File;
 
@@ -123,7 +124,8 @@ public class EmpDaoImpl extends DataUpdate implements EmpDao {
         Emp emp = null;
         try{
             Class.forName(MySQL_File.getDriver());
-            conn = DriverManager.getConnection(MySQL_File.getUrl(), MySQL_File.getUsername(), MySQL_File.getPassword());
+            //conn = DriverManager.getConnection(MySQL_File.getUrl(), MySQL_File.getUsername(), MySQL_File.getPassword());
+            conn = MyConnectionPool.getConnection();
             String SQL = "select * from mytest.emp where empno = ?";
             preparedStatement = conn.prepareStatement(SQL);
             preparedStatement.setInt(1,empno);
@@ -142,7 +144,9 @@ public class EmpDaoImpl extends DataUpdate implements EmpDao {
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            MySQL_File.close(conn,preparedStatement);
+            MyConnectionPool.returnConnection(conn);
+            MySQL_File.close(preparedStatement);
+            //MySQL_File.close(conn,preparedStatement);
         }
         return emp;
     }
