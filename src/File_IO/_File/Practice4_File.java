@@ -45,12 +45,12 @@ public class Practice4_File {
     public static void deleteFile(File deleteFile){
         if(deleteFile.isFile()){
             boolean delete = deleteFile.delete();
-            readDelete(deleteFile, delete);
+            readDelete(deleteFile, delete);//输出删除结果。可省略
         }else{
             File[] files = deleteFile.listFiles();
             if(files==null){
                 boolean delete = deleteFile.delete();
-                readDelete(deleteFile, delete);
+                readDelete(deleteFile, delete);//输出删除结果。可省略
             }else{
                 //删除子文件和子文件夹
                 for (File file : files) {
@@ -59,7 +59,7 @@ public class Practice4_File {
                 //删除子文件和子文件夹之后，当前文件夹为空，还需对该文件进行删除操作
                 //如果未进行该操作，开始为非空的文件夹将不会被删除
                 boolean delete = deleteFile.delete();
-                readDelete(deleteFile, delete);
+                readDelete(deleteFile, delete);//输出删除结果。可省略
             }
         }
 

@@ -12,19 +12,14 @@ public class Practice3_File {
     public static void main(String[] args){
         //在指定文件夹下，查找所有指定后缀名的文件
         File aaa = new File("src\\File_IO\\_File\\aaa");
-        List<File> filteredFiles = new LinkedList<>();//存储查询到的文件的集合
+        List<File> filteredFiles = new ArrayList<>();//存储查询到的文件的集合
         fandFile(aaa, ".txt",filteredFiles);
         filteredFiles.forEach(System.out::println);
 
         System.out.println("-------------------------------------------------");
         //查询桌面下的所有txt文件
         File desktop = new File("C:\\Users\\shift\\Desktop");
-        List<File> txtFiles = new LinkedList<>();
-        //为什么选择 LinkedList 而不是 ArrayList？
-        //因为LinkedList是双向链表，而ArrayList是顺序存储，
-        //所以LinkedList的删除和插入效率更高，
-        //而ArrayList的删除和插入效率较低。
-        //在fandFile()方法中，执行了大量的插入操作，因此选择LinkedList。
+        List<File> txtFiles = new ArrayList<>();
         fandFile(desktop,".txt",txtFiles);
         txtFiles.forEach(System.out::println);
     }
